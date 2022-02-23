@@ -1,11 +1,8 @@
-import React, { useState } from 'react';
-type Props = {
-  checked: boolean;
-};
-const TodoCreation = ({ checked }: Props) => {
-  const [checkedd, setChecked] = useState(false);
+import React from 'react';
+
+const TodoCreation = () => {
   return (
-    <div className="flex w-full items-center gap-2 rounded-md border-b border-gray-400 bg-gray-800 px-4 py-5 text-lg">
+    <div className="flex w-full items-center gap-2 rounded-md bg-gray-800 px-4 py-5 text-lg">
       <input
         type="text"
         placeholder="New todo.."
