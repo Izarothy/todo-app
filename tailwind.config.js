@@ -4,7 +4,14 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        back: "url('/images/back.jpg')",
+      },
+    },
+    fontFamily: {
+      montserrat: ['Montserrat', 'sans-serif'],
+    }
   },
   plugins: [],
 }
