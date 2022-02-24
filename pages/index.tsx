@@ -40,7 +40,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="flex h-screen justify-center bg-back bg-cover bg-center py-48 font-montserrat text-white">
-        <main className="flex flex-col gap-4 rounded-md bg-gray-700 px-6 pt-8 pb-2 lg:w-1/4">
+        <main className="flex flex-col gap-4 rounded-md bg-stone-800 px-6 pt-8 pb-2 lg:w-1/4 ">
           <p className="text-center text-red-500">{err}</p>
           <h1 className="text-center text-6xl font-bold uppercase tracking-wider text-white [text-shadow:2px_2px_2px_#000]">
             Todos
