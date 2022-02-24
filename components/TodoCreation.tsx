@@ -6,9 +6,10 @@ type Props = {
   setTodos:
     | React.Dispatch<React.SetStateAction<TodoT[]>>
     | React.Dispatch<React.SetStateAction<never[]>>;
+  setErr: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const TodoCreation = ({ todos, setTodos }: Props) => {
+const TodoCreation = ({ todos, setTodos, setErr }: Props) => {
   const [text, setText] = useState('');
 
   const setDefault = () => {
@@ -20,16 +21,28 @@ const TodoCreation = ({ todos, setTodos }: Props) => {
     const todoToAdd = { checked: false, name: text };
     let todosToAdd: Array<TodoT> = [];
 
+    const localTodos = localStorage.getItem('todos');
+
+    if (localTodos) {
+      // If duplicate exists, don't add
+      if (JSON.parse(localTodos).find((t: TodoT) => t.name === text)) {
+        setDefault();
+        return setErr('Todo of same name exists');
+      }
+    }
+
     // If localstorage isn't empty and previous todos are not empty
-    if (localStorage.getItem('todos') && todos.length) {
+    if (localTodos && todos.length) {
       todosToAdd = [...todos, todoToAdd];
       localStorage.setItem('todos', JSON.stringify(todosToAdd));
+      setErr('');
     } else {
       todosToAdd.push(todoToAdd);
       localStorage.setItem('todos', JSON.stringify(todosToAdd));
+      setErr('');
     }
     setDefault();
-    localStorage.getItem('todos') && setTodos(JSON.parse(String(localStorage.getItem('todos'))));
+    localTodos && setTodos(JSON.parse(localTodos));
   };
   return (
     <div className="flex w-full items-center gap-2 rounded-md bg-gray-800 px-4 py-3 text-lg">
