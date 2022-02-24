@@ -1,25 +1,24 @@
 import Todo from '@components/Todo';
 import TodoCreation from '@components/TodoCreation';
+
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
-import { TodoT } from '@custTypes/TodoT';
-const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-const dayOfTheWeek = weekdays[new Date().getDay()];
-const month = months[new Date().getMonth()];
-const day = new Date().getDate();
-const year = new Date().getFullYear();
-const todayDate = `${month} ${day}, ${year}`;
 
+import { TodoT } from '@custTypes/TodoT';
+import getDate from '@utils/getDate';
+
+const [todayDate, dayOfTheWeek] = getDate();
 const removeTodos = () => {
   localStorage.removeItem('todos');
 };
+
 const Home: NextPage = () => {
   const [todos, setTodos] = useState<Array<TodoT>>([]);
   const [numLeft, setNumLeft] = useState<number>(0);
   const [err, setErr] = useState<string>('');
 
+  // Grab todos and number of how many are left from localStorage
   useEffect(() => {
     const localTodos = localStorage.getItem('todos');
     if (localTodos) {
@@ -28,6 +27,7 @@ const Home: NextPage = () => {
     }
   }, []);
 
+  // Remove the error after 5s
   useEffect(() => {
     setTimeout(() => {
       setErr('');
@@ -41,7 +41,7 @@ const Home: NextPage = () => {
       </Head>
       <div className="flex h-screen justify-center bg-back bg-cover bg-center py-48 font-montserrat text-white">
         <main className="flex flex-col gap-4 rounded-md bg-gray-700 px-6 pt-8 pb-2 lg:w-1/4">
-          <p className="text-center text-red-500 transition">{err}</p>
+          <p className="text-center text-red-500">{err}</p>
           <h1 className="text-center text-6xl font-bold uppercase tracking-wider text-white [text-shadow:2px_2px_2px_#000]">
             Todos
           </h1>
@@ -49,7 +49,7 @@ const Home: NextPage = () => {
             <h2 className="text-2xl font-bold">{dayOfTheWeek}</h2>
             <span className="text-lg text-gray-400">{todayDate}</span>
           </div>
-          <TodoCreation todos={todos} setTodos={setTodos} setErr={setErr} />
+          <TodoCreation setTodos={setTodos} setErr={setErr} setNumLeft={setNumLeft} />
           <section className="flex h-full grow flex-col overflow-y-scroll scrollbar-hide">
             {todos.length ? (
               todos.map((todo: TodoT, idx: number) => {
