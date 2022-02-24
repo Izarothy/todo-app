@@ -47,7 +47,7 @@ const TodoCreation = ({ setTodos, setErr, setNumLeft }: Props) => {
     setDefault();
   };
   return (
-    <div className="flex w-full items-center gap-2 rounded-md bg-gray-800 px-4 py-3 text-lg">
+    <div className="flex w-full items-center gap-2 rounded-md border border-gray-500 px-4 py-3 text-lg">
       <input
         type="text"
         placeholder="New todo.."

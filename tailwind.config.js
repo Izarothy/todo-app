@@ -8,6 +8,10 @@ module.exports = {
       backgroundImage: {
         back: "url('/images/back.jpg')",
       },
+      colors: {
+        primary: '#101820FF',
+        secondary: '#F2AA4CFF'
+      }
     },
     fontFamily: {
       montserrat: ['Montserrat', 'sans-serif'],

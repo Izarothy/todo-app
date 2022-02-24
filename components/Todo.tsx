@@ -24,7 +24,7 @@ const Todo = ({ checked, name, setNumLeft }: Props) => {
   };
 
   return (
-    <div className="flex gap-4 border-b border-gray-500 bg-gray-700 py-2 px-3">
+    <div className="flex gap-4 border-b border-gray-500 py-2 px-3">
       <button
         className={`${
           completed ? `bg-green-400` : `border border-gray-500 bg-inherit`
